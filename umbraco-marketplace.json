@@ -1,0 +1,13 @@
+{
+  "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
+  "Title": "Handbook",
+  "Description": "Display your own Markdown documentation inside the Umbraco backoffice.",
+  "Category": "Editor Tools",
+  "LicenseTypes": ["Free"],
+  "PackageType": "Package",
+  "DocumentationUrl": "https://github.com/skttl/umbraco-handbook/blob/main/docs/nuget-readme.md",
+  "IssueTrackerUrl": "https://github.com/skttl/umbraco-handbook/issues",
+  "Tags": ["documentation", "markdown", "editors", "handbook"],
+  "Screenshots": [{"ImageUrl":"https://raw.githubusercontent.com/skttl/umbraco-handbook/main/docs/images/handbook.jpg","Caption":"Native Handbook navigation and a Markdown guide with a Mermaid diagram"}],
+  "VersionDependencyMode": "SemVer"
+}
