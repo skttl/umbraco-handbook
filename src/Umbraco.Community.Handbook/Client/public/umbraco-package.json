@@ -1,1 +1,2 @@
-{"$schema":"../../umbraco-package-schema.json","name":"Handbook","version":"18.0.0","extensions":[{"type":"backofficeEntryPoint","alias":"Handbook.EntryPoint","name":"Handbook Entry Point","js":"/App_Plugins/Handbook/handbook.js"}]}
+{"$schema":"../../umbraco-package-schema.json","name":"Handbook","version":"17.0.0","extensions":[{"type":"backofficeEntryPoint","alias":"Handbook.EntryPoint","name":"Handbook Entry Point","js":"/App_Plugins/Handbook/handbook.js"}]}
+

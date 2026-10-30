@@ -20,7 +20,8 @@ const manifests: UmbExtensionManifest[] = [
 export const onInit: UmbEntryPointOnInit = async (host, registry) => {
   await new Promise<void>(resolve => host.consumeContext(UMB_AUTH_CONTEXT, auth => {
     if (!auth) return;
-    auth.configureClient(client);
+    const config = auth.getOpenApiConfiguration();
+    client.setConfig({baseUrl:config.base,credentials:config.credentials,auth:config.token});
     resolve();
   }));
   registry.registerMany(manifests);

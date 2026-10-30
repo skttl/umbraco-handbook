@@ -2,8 +2,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Umbraco.Cms.Api.Management.OpenApi;
+using Microsoft.OpenApi;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.Extensions.Options;
 using Umbraco.Cms.Api.Common.OpenApi;
+using Umbraco.Cms.Api.Management.OpenApi;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
 using Umbraco.Cms.Core.Security;
@@ -27,6 +33,23 @@ public sealed class HandbookComposer : IComposer
             var accessor = context.Resource is Microsoft.AspNetCore.Http.HttpContext http ? http.RequestServices.GetRequiredService<IBackOfficeSecurityAccessor>() : null;
             return accessor?.BackOfficeSecurity?.CurrentUser?.AllowedSections.Contains(SectionAlias) == true;
         })));
-        builder.AddBackOfficeOpenApiDocument("handbook", document => document.WithTitle("Handbook API").WithBackOfficeAuthentication().WithJsonOptions(Umbraco.Cms.Core.Constants.JsonOptionsNames.BackOffice));
+        builder.Services.Configure<SwaggerGenOptions>(options =>
+        {
+            options.SwaggerDoc("handbook", new OpenApiInfo { Title = "Handbook API", Version = "1.0" });
+            options.OperationFilter<HandbookSecurityFilter>();
+        });
+        builder.Services.AddSingleton<IOperationIdHandler, HandbookOperationIds>();
     }
+}
+
+public sealed class HandbookSecurityFilter : BackOfficeSecurityRequirementsOperationFilterBase
+{
+    protected override string ApiName => "handbook";
+}
+
+public sealed class HandbookOperationIds(IOptions<ApiVersioningOptions> options) : OperationIdHandler(options)
+{
+    protected override bool CanHandle(ApiDescription api, ControllerActionDescriptor action)
+        => action.ControllerTypeInfo.AsType() == typeof(HandbookController);
+    public override string Handle(ApiDescription api) => "GetHandbook" + api.ActionDescriptor.RouteValues["action"];
 }
