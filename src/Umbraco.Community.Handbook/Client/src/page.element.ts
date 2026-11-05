@@ -2,9 +2,11 @@ import { UmbLitElement } from '@umbraco-cms/backoffice/lit-element';
 import { css,html,customElement,property,state } from '@umbraco-cms/backoffice/external/lit';
 import { getHandbookPage,getHandbookAsset } from './api/sdk.gen';
 import type { DocumentPage } from './api/types.gen';
-import { localTarget,pageUrl } from './paths';
+import { documentPath,localTarget,pageUrl } from './paths';
 import { renderDocument } from './render';
 import { UMB_SERVER_CONTEXT } from '@umbraco-cms/backoffice/server';
+import { UmbViewContext } from '@umbraco-cms/backoffice/view';
+import type { UmbTreeItemModel } from '@umbraco-cms/backoffice/tree';
 
 let diagramId = 0;
 let mermaidQueue = Promise.resolve();
@@ -12,12 +14,14 @@ let mermaidQueue = Promise.resolve();
 @customElement('handbook-page')
 export class HandbookPageElement extends UmbLitElement {
   @property() path = '';
+  @property({attribute:false}) ancestors: UmbTreeItemModel[] = [];
   @state() private _page?: DocumentPage;
   @state() private _error?: string;
   @state() private _loading = true;
   @state() private _backofficePath = '/umbraco';
   #request = 0;
   #urls: string[] = [];
+  #view = new UmbViewContext(this,null);
   constructor() {
     super();
     this.consumeContext(UMB_SERVER_CONTEXT,server => { if (server) this._backofficePath = server.getBackofficePath(); });
@@ -32,6 +36,7 @@ export class HandbookPageElement extends UmbLitElement {
     const request = ++this.#request;
     this.#clearImages();
     this._loading = true; this._error = undefined; this._page = undefined;
+    this.#view.setTitle('Handbook');
     try {
       const result = await getHandbookPage({query:{path:this.path}});
       if (request !== this.#request) return;
@@ -40,6 +45,7 @@ export class HandbookPageElement extends UmbLitElement {
         return;
       }
       this._page = result.data;
+      this.#view.setTitle(result.data.title ? `${result.data.title} | Handbook` : 'Handbook');
       this._loading = false;
       await this.updateComplete;
       const container = this.shadowRoot?.querySelector<HTMLElement>('#body');
@@ -128,11 +134,18 @@ export class HandbookPageElement extends UmbLitElement {
         ${this._page.invalidMetadata ? html`<p role="status">${this.localize.term('handbook_invalidMetadata')}</p>` : ''}
         ${this._page.isOverview ? html`<ul class="overview">${this._page.children.map(node=>html`<li><a href=${pageUrl(node.path,'',this._backofficePath)}><uui-icon name=${node.isFolder ? 'icon-folder' : 'icon-document'}></uui-icon> ${node.title}</a>${node.description ? html`<p>${node.description}</p>` : ''}</li>`)}</ul>${!this._page.children.length ? html`<p>${this.localize.term('handbook_empty')}</p>` : ''}` : html`<div id="body"></div>`}
       </article></uui-box>` : ''}
+      ${this._page ? html`<umb-footer-layout slot="footer"><uui-breadcrumbs>
+        ${this.path ? html`<uui-breadcrumb-item href=${pageUrl('','',this._backofficePath)}>Handbook</uui-breadcrumb-item>` : ''}
+        ${this.ancestors.map(item=>html`<uui-breadcrumb-item href=${pageUrl(documentPath(item.unique),'',this._backofficePath)}>${item.name}</uui-breadcrumb-item>`)}
+        <uui-breadcrumb-item last-item>${title}</uui-breadcrumb-item>
+      </uui-breadcrumbs></umb-footer-layout>` : ''}
     </umb-body-layout>`;
   }
   static override styles = css`
     :host{display:block;height:100%;min-width:0;color:var(--uui-color-text)}
-    article{max-width:80ch;margin-inline:auto;line-height:1.65;overflow-wrap:anywhere}
+    uui-breadcrumbs{margin-inline:var(--uui-size-layout-1)}
+    article{max-width:120ch;line-height:1.65;overflow-wrap:anywhere}
+    article p:not(:has(>img)),article ul,article ol,article blockquote{max-width:80ch}
     a{color:var(--uui-color-interactive)}a:focus-visible{outline:2px solid var(--uui-color-focus);outline-offset:3px}
     img,svg{max-width:100%;height:auto}pre,figure{overflow:auto;margin-inline:0}pre{padding:var(--uui-size-space-4);background:var(--uui-color-surface-alt);border-radius:var(--uui-border-radius)}
     table{display:block;overflow:auto;border-collapse:collapse}th,td{padding:var(--uui-size-space-3);border:1px solid var(--uui-color-border)}
