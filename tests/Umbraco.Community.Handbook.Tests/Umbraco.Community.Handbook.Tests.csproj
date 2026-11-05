@@ -7,6 +7,5 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5"><PrivateAssets>all</PrivateAssets></PackageReference>
     <ProjectReference Include="../../src/Umbraco.Community.Handbook/Umbraco.Community.Handbook.csproj" />
     <Using Include="Xunit" />
-    <Compile Include="../../demo/Handbook.TestSite/DevelopmentSettings.cs" Link="DevelopmentSettings.cs" />
   </ItemGroup>
 </Project>
