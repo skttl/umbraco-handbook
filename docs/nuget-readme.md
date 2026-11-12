@@ -7,7 +7,7 @@ Handbook adds a native read-only section with a navigation tree. You write the d
 ## Install
 
 ```sh
-dotnet add package Umbraco.Community.Handbook --version 19.0.0-rc1
+dotnet add package Umbraco.Community.Handbook --version 19.0.0-beta01
 ```
 
 Use 17.x for Umbraco 17, 18.x for Umbraco 18, or 19.x for Umbraco 19. The v19 release candidate requires Umbraco 19 RC1 or newer and .NET 11. Configure one directory in appsettings.json:

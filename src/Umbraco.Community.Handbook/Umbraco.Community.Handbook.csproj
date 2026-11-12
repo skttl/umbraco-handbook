@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>Umbraco.Community.Handbook</PackageId>
-    <Version>19.0.0-rc1</Version>
+    <Version>19.0.0-beta01</Version>
     <Authors>skttl</Authors>
     <Description>Display your own Markdown documentation inside the Umbraco backoffice.</Description>
     <PackageTags>umbraco;umbraco-marketplace;documentation;markdown;handbook</PackageTags>

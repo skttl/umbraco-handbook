@@ -54,7 +54,7 @@ To regenerate the API client, run the testsite and execute `npm run generate-cli
 
 `main` targets Umbraco 19, `v18/main` targets Umbraco 18 and `v17/main` targets Umbraco 17. All publish `Umbraco.Community.Handbook`. Versions 19.x use `[19.0.0-rc1,20.0.0)`, versions 18.x use `[18.0.0,19.0.0)` and versions 17.x use `[17.0.0,18.0.0)`. Use the corresponding client major and Clean 19 beta/8.x/7.x in the demo. NuGet can warn rather than reject an incompatible dependency override in a consuming project.
 
-Tag `v19.0.0-rc1` from `main`, v18 releases from `v18/main` and v17 releases from `v17/main`. The tag without `v` becomes the NuGet package version. The publish workflow builds the client, tests, packs, validates package identity/range/contents and uses NuGet trusted publishing. Configure a nuget.org trust policy for owner `skttl`, repo `umbraco-handbook`, workflow `publish.yml`, environment `release`. Create that GitHub environment with `NUGET_USER` set to the owning NuGet account name. No permanent NuGet API key is required. Never reuse a published package version.
+Tag `v19.0.0-beta01` from `main`, v18 releases from `v18/main` and v17 releases from `v17/main`. The tag without `v` becomes the NuGet package version. The publish workflow builds the client, tests, packs, validates package identity/range/contents and uses NuGet trusted publishing. Configure a nuget.org trust policy for owner `skttl`, repo `umbraco-handbook`, workflow `publish.yml`, environment `release`. Create that GitHub environment with `NUGET_USER` set to the owning NuGet account name. No permanent NuGet API key is required. Never reuse a published package version.
 
 ## License
 

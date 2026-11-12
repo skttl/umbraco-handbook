@@ -25,4 +25,6 @@ Packing emits NU5118 because the existing project lists the transitive target th
 
 Test login and Handbook navigation in a running Umbraco 19 site. Back up an existing database before starting the upgraded demo; Umbraco 18 cannot reopen a database upgraded by v19. Review the site's configuration and imaging key against the [official upgrade notes](https://docs.umbraco.com/umbraco-cms/19.latest/get-started/upgrading-and-migrating/version-specific). Clean is still a beta dependency of the demo.
 
-No release tag or NuGet publication is part of this preparation.
+## Beta01 release
+
+After the RC1 preparation, the demo was started with a database backup and responded HTTP 200 at `/umbraco`. The user confirmed that it works and requested the Handbook release `19.0.0-beta01`. The testsite was then stopped. Handbook's package and manifest versions use `19.0.0-beta01`; the Umbraco dependency remains RC1 with the same compatibility interval. The release tag is `v19.0.0-beta01`.
