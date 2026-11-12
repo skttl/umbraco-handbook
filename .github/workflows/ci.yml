@@ -2,7 +2,7 @@ name: Build and test
 on:
   workflow_dispatch:
   push:
-    branches: [main, v17/main, 'codex/**']
+    branches: [main, v18/main, v17/main, 'codex/**']
   pull_request:
 permissions:
   contents: read
