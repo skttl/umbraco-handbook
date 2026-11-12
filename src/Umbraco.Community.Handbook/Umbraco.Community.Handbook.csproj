@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net11.0</TargetFramework>
     <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>Umbraco.Community.Handbook</PackageId>
-    <Version>18.0.0</Version>
+    <Version>19.0.0-rc1</Version>
     <Authors>skttl</Authors>
     <Description>Display your own Markdown documentation inside the Umbraco backoffice.</Description>
     <PackageTags>umbraco;umbraco-marketplace;documentation;markdown;handbook</PackageTags>
@@ -18,13 +18,13 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Umbraco.Cms.Api.Management" Version="[18.0.0,19.0.0)" />
+    <PackageReference Include="Umbraco.Cms.Api.Management" Version="[19.0.0-rc1,20.0.0)" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
     <!-- Keep Umbraco's lower-bound dependency graph on patched releases. -->
-    <PackageReference Include="Microsoft.OpenApi" Version="2.13.0" />
+    <PackageReference Include="Microsoft.OpenApi" Version="3.11.0" />
     <PackageReference Include="MessagePack" Version="3.1.12" />
-    <PackageReference Include="System.Security.Cryptography.Xml" Version="10.0.14" />
-    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.14" />
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="11.0.0" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="11.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Client/**" />

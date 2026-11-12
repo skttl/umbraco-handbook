@@ -6,6 +6,7 @@
 **/umbraco/Logs/
 **/wwwroot/App_Plugins/Handbook/
 artifacts/
+.dotnet/
 .superpowers/
 *.user
 .vs/

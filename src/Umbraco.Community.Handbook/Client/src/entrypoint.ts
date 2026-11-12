@@ -21,7 +21,7 @@ export const onInit: UmbEntryPointOnInit = async (host, registry) => {
   await new Promise<void>(resolve => host.consumeContext(UMB_AUTH_CONTEXT, auth => {
     if (!auth) return;
     const config = auth.getOpenApiConfiguration();
-    client.setConfig({baseUrl:config.base,credentials:config.credentials,auth:config.token});
+    client.setConfig({baseUrl:config.base,credentials:config.credentials});
     resolve();
   }));
   registry.registerMany(manifests);

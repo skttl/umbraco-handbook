@@ -11,7 +11,7 @@ Keep your editors' guides alongside your project and make them available where e
 - Interface in English, Danish, German, French, Spanish, Italian, Swedish, Norwegian Bokmål and Dutch.
 - Default access for Administrators, Editors, Writers and Translators, adjustable through Umbraco's user groups.
 
-Install `Umbraco.Community.Handbook`, choosing 17.x for Umbraco 17 or 18.x for Umbraco 18. Add your documentation folder:
+Install `Umbraco.Community.Handbook`, choosing 17.x for Umbraco 17, 18.x for Umbraco 18 or 19.x for Umbraco 19. The v19 release candidate requires Umbraco 19 RC1 or newer and .NET 11. Add your documentation folder:
 
 ```json
 {"Umbraco":{"Community":{"Handbook":{"DocumentationPath":"Documentation"}}}}
